@@ -5,25 +5,20 @@
  *
  * Return: Always 0 (Success)
  */
+
 int main(void)
 {
-	int x, y;
+	int number;
 
-	for (x = 0; x <= 8; x++)
+	for (number = 0; number <= 9; number++)
 	{
-		for (y = x + 1; y <= 9; y++)
-		{
-			putchar(x + '0');
-			putchar(y + '0');
+		putchar((number % 10) + '0');
+		if (number == 9)
+			continue;
 
-			if (x != 8 || y != 9) /* don't print comma+space after last combo */
-			{
-				putchar(',');
-				putchar(' ');
-			}
-		}
+		putchar(',');
+		putchar(' ');
 	}
-
 	putchar('\n');
 
 	return (0);
