@@ -1,0 +1,9 @@
+# Ignore Vim swap files
+*.swp
+
+# Ignore compiled C binaries
+a.out
+
+# Optional: ignore object files too (if you use gcc -c)
+*.o
+
