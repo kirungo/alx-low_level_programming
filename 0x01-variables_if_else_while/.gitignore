@@ -1,9 +1,51 @@
-# Ignore Vim swap files
-*.swp
+# ==========================
+# C Project .gitignore
+# ==========================
 
-# Ignore compiled C binaries
+# Compiled binary files
 a.out
+*.out
+*.exe
 
-# Optional: ignore object files too (if you use gcc -c)
+# Object files
 *.o
+*.obj
 
+# Shared and static libraries
+*.so
+*.dll
+*.dylib
+*.lib
+*.a
+
+# Debugging and profiling files
+*.dSYM/
+*.stackdump
+*.core
+*.gch
+*.pch
+
+# Editor swap/backup files
+*.swp
+*.swo
+*~
+# (for vim/nano/emacs temp files)
+
+# Build directories (optional)
+build/
+bin/
+debug/
+release/
+
+# OS system files
+.DS_Store
+Thumbs.db
+
+# Code analysis or IDE settings (optional)
+.vscode/
+.idea/
+*.log
+
+# Ignore generated assembly or preprocessor output
+*.s
+*.i
