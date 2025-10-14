@@ -1,7 +1,3 @@
-Here’s a polished and nicely formatted **`README.md`** version of your content:
-
----
-
 # 📘 0x02. C - Functions, Nested Loops
 
 ## 📚 Resources
