@@ -3,43 +3,52 @@
 /**
  * main - prints the first 98 Fibonacci numbers, starting with 1 and 2
  *
- * Return: Always 0
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int i;
+	unsigned long i;
 	unsigned long f1 = 1, f2 = 2, sum;
-	unsigned long f1_high, f1_low, f2_high, f2_low, high_sum, low_sum;
+	/* split parts for big numbers (high and low) */
+	unsigned long f1_high, f1_low, f2_high, f2_low;
+	unsigned long high_sum, low_sum;
+	const unsigned long BASE = 1000000000000000000UL; /* 10^18 */
 
-	for (i = 1; i <= 91; i++)
+	/* Print the first two terms */
+	printf("%lu, %lu", f1, f2);
+
+	/* Print terms 3..93 using unsigned long (safe) */
+	for (i = 3; i <= 93; i++)
 	{
-		printf("%lu, ", f1);
 		sum = f1 + f2;
+		printf(", %lu", sum);
 		f1 = f2;
 		f2 = sum;
 	}
 
-	f1_high = f1 / 1000000000000000000;
-	f1_low = f1 % 1000000000000000000;
-	f2_high = f2 / 1000000000000000000;
-	f2_low = f2 % 1000000000000000000;
+	/* Prepare high/low parts for terms 94..98 */
+	f1_high = f1 / BASE;
+	f1_low = f1 % BASE;
+	f2_high = f2 / BASE;
+	f2_low = f2 % BASE;
 
+	/* Compute and print terms 94..98 using high/low arithmetic */
 	for (; i <= 98; i++)
 	{
-		low_sum = (f1_low + f2_low);
-		high_sum = (f1_high + f2_high) + (low_sum / 1000000000000000000);
-		low_sum = low_sum % 1000000000000000000;
+		low_sum = f1_low + f2_low;
+		high_sum = f1_high + f2_high + (low_sum / BASE);
+		low_sum = low_sum % BASE;
 
-		if (i != 98)
-			printf("%lu%018lu, ", high_sum, low_sum);
-		else
-			printf("%lu%018lu\n", high_sum, low_sum);
+		/* print with zero-padded low part */
+		printf(", %lu%018lu", high_sum, low_sum);
 
+		/* shift forward */
 		f1_high = f2_high;
 		f1_low = f2_low;
 		f2_high = high_sum;
 		f2_low = low_sum;
 	}
 
+	printf("\n");
 	return (0);
 }
