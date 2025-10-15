@@ -12,7 +12,7 @@ int main(void)
 	unsigned long f1_half1, f1_half2, f2_half1, f2_half2;
 	unsigned long half1, half2;
 
-	for (count = 0; count < 92; count++) /* up to 92 fits in unsigned long */
+	for (count = 0; count < 92; count++)
 	{
 		sum = f1 + f2;
 		printf("%lu", sum);
@@ -24,7 +24,6 @@ int main(void)
 		f2 = sum;
 	}
 
-	/* split numbers for the rest */
 	f1_half1 = f1 / 10000000000;
 	f1_half2 = f1 % 10000000000;
 	f2_half1 = f2 / 10000000000;

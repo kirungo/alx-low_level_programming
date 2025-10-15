@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/teresiakirungo/ALX/alx-low_level_programming/0x02-functions_nested_loops/104-fibonacci'
+relocations:     []
+...
