@@ -7,46 +7,46 @@
  */
 int main(void)
 {
-	unsigned long i;
-	unsigned long f1 = 1, f2 = 2, sum;
-	/* split parts for big numbers (high and low) */
-	unsigned long f1_high, f1_low, f2_high, f2_low;
-	unsigned long high_sum, low_sum;
-	const unsigned long BASE = 1000000000000000000UL; /* 10^18 */
+	int count;
+	unsigned long f1 = 0, f2 = 1, sum;
+	unsigned long f1_half1, f1_half2, f2_half1, f2_half2;
+	unsigned long half1, half2;
 
-	/* Print the first two terms */
-	printf("%lu, %lu", f1, f2);
-
-	/* Print terms 3..93 using unsigned long (safe) */
-	for (i = 3; i <= 93; i++)
+	for (count = 0; count < 92; count++) /* up to 92 fits in unsigned long */
 	{
 		sum = f1 + f2;
-		printf(", %lu", sum);
+		printf("%lu", sum);
+
+		if (count != 91)
+			printf(", ");
+
 		f1 = f2;
 		f2 = sum;
 	}
 
-	/* Prepare high/low parts for terms 94..98 */
-	f1_high = f1 / BASE;
-	f1_low = f1 % BASE;
-	f2_high = f2 / BASE;
-	f2_low = f2 % BASE;
+	/* split numbers for the rest */
+	f1_half1 = f1 / 10000000000;
+	f1_half2 = f1 % 10000000000;
+	f2_half1 = f2 / 10000000000;
+	f2_half2 = f2 % 10000000000;
 
-	/* Compute and print terms 94..98 using high/low arithmetic */
-	for (; i <= 98; i++)
+	for (; count < 98; count++)
 	{
-		low_sum = f1_low + f2_low;
-		high_sum = f1_high + f2_high + (low_sum / BASE);
-		low_sum = low_sum % BASE;
+		half1 = f1_half1 + f2_half1;
+		half2 = f1_half2 + f2_half2;
 
-		/* print with zero-padded low part */
-		printf(", %lu%018lu", high_sum, low_sum);
+		if (half2 >= 10000000000)
+		{
+			half1 += 1;
+			half2 %= 10000000000;
+		}
 
-		/* shift forward */
-		f1_high = f2_high;
-		f1_low = f2_low;
-		f2_high = high_sum;
-		f2_low = low_sum;
+		printf(", %lu%010lu", half1, half2);
+
+		f1_half1 = f2_half1;
+		f1_half2 = f2_half2;
+		f2_half1 = half1;
+		f2_half2 = half2;
 	}
 
 	printf("\n");
